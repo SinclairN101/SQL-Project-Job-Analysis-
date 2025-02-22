@@ -4,36 +4,147 @@
 
 After years of wanting to dive deeper into **data analysis**, I finally took the plunge! I completed a **[Data Analytics course at BrainStation](https://brainstation.io/course/toronto/data-analytics?utm_keyword=brainstation%20data%20analytics&utm_network=g&utm_matchtype=e&utm_creative=482969347331&utm_target=&utm_placement=&utm_device=c&utm_campaign=11729367083&utm_adgroup=116579475769&utm_source=AdWords&utm_target_id=kwd-817758893710&gad_source=1&gclid=Cj0KCQiA_NC9BhCkARIsABSnSTa6vvUpxcpNFYK6xtl-IJxuRwRLpSxi7wY0g18OSwV2M4MCRjA7veQaAkyuEALw_wcB)**, an **[SQL Bootcamp on Udemy](https://www.udemy.com/course/the-complete-sql-bootcamp/?couponCode=24T4MT180225)**, and continued expanding my knowledge through **[Luke Barousse's SQL course](https://www.lukebarousse.com/sql)** and his insightful YouTube content.
 
-For this project, I analyzed **data from Luke's SQL course**, which provides valuable insights into **job titles, salaries, locations, and essential skills** in the data analytics field. This project not only helps me refine my SQL skills but also serves as a **practical addition to my portfolio** as I continue building my expertise in data analysis.
+This project explores the **Data Analyst job market** using **SQL**. The queries are designed to extract insights about salaries, locations, skills, and companies offering top-paying jobs.
+This project not only helps me refine my SQL skills but also serves as a **practical addition to my portfolio** as I continue building my expertise in data analysis.
 
 ---
 
-## 🔍 Key Questions
+## 🔍 **Key Questions Answered**
 
-Through my SQL queries, I aimed to answer:
+Through SQL queries, I explored:
 
-1. **What are the top-paying data analyst jobs?**
-2. **What skills are required for these top-paying jobs?**
-3. **What skills are most in demand for data analysts?**
-4. **Which skills are associated with higher salaries?**
-5. **What are the most optimal skills to learn?**
+1. **Which Canadian cities offer the highest average salaries for Data Analyst roles?**
+2. **What are the top 10 highest-paying Data Analyst jobs in Canada?**
+3. **Which companies in Canada offer the highest-paying Data Analyst jobs?**
+4. **What skills are required for the highest-paying Data Analyst jobs in Canada?**
+5. **Which skills are most frequently mentioned in job postings?**
 
----
-
-## 🛠 Tools Used
-
-To dive deep into the data analyst job market, using data from **[Luke Barousse's SQL course](https://www.lukebarousse.com/sql)**, I utilized the following tools:
-
-- **SQL** – The backbone of my analysis.
-- **PostgreSQL** – My database management system of choice. I used this in both my Udemy course and Luke’s course. It was ideal for handling job posting data, making it a perfect match for this project.
-- **Visual Studio Code** – Used extensively during Luke’s course. It was especially helpful for writing SQL queries and seamlessly pushing updates to GitHub.
-- **Git & GitHub** – Essential for version control and sharing my SQL scripts and analysis.
-- **Tableau** – Used for data visualization, allowing me to present insights clearly and effectively.
+Each query was designed to provide insights that can help job seekers and professionals understand the **data analyst job market trends** in Canada.
 
 ---
 
-## 📊 The Analysis
+## 🛠 **Tools Used**
 
-Each query in this project was designed to explore key aspects of the **data analyst job market**. Here's an overview of my approach:
+To analyze job postings effectively, I used:
 
-More to come (WIP) 📉
+- **SQL & PostgreSQL** – For querying the database and extracting insights.
+- **Visual Studio Code** – My primary SQL editor for writing and refining queries.
+- **Git & GitHub** – For version control and sharing SQL scripts.
+- **Tableau** – For visualizing key insights into salary trends, skill demand, and job locations.
+
+---
+
+## 📊 **The Analysis**
+
+### **1️⃣ Which Canadian cities offer the highest salaries for Data Analysts?**
+
+✅ **Top-paying cities include**:
+
+- **Richmond, BC**: $148,453
+- **Waterloo, ON**: $140,830
+- **British Columbia (Unspecified)**: $138,636
+- **Vancouver, BC**: $135,586
+- **Remote Jobs**: $134,902
+
+🔹 _Insight:_ Data Analyst salaries tend to be **higher in tech-focused cities** like Vancouver and Waterloo. Remote roles also offer competitive salaries.
+
+---
+
+### **2️⃣ What are the top 10 highest-paying Data Analyst jobs in Canada?**
+
+✅ **Top-paying job titles include**: -------->>>
+
+- **Principal Data Analyst** – $160,000
+- **Data Architect** – $120,000
+- **Data Analyst, Risk User Experience** – $111,175
+- **Data Analyst (VBA, Tableau)** – $109,000
+
+🔹 _Insight:_ Specialized roles, such as those requiring **risk management or advanced data visualization skills**, command higher salaries.
+
+---
+
+### **3️⃣ Which companies in Canada offer the highest-paying Data Analyst jobs?**
+
+✅ **Top-paying companies include**:
+
+- **Realtime Recruitment** – $160,000
+- **Motion Recruitment** – $120,000
+- **Stripe** – $111,175
+- **Sun Life** – $109,000
+- **ATB Financial** – $102,750
+
+🔹 _Insight:_ **Finance and tech companies** tend to pay the highest salaries for Data Analysts in Canada.
+
+```sql
+WITH top_paying_jobs AS (
+  SELECT
+    J.job_id,
+    J.job_title,
+    J.job_location,
+    J.job_schedule_type,
+    J.salary_year_avg,
+    J.job_posted_date,
+    C.name AS company_name
+  FROM job_postings_fact J
+  LEFT JOIN company_dim C ON J.company_id = C.company_id
+  WHERE
+    J.job_title_short = 'Data Analyst'
+    AND J.job_country = 'Canada'
+    AND J.salary_year_avg IS NOT NULL
+  ORDER BY J.salary_year_avg DESC
+  LIMIT 10
+)
+-- Top companies with the highest average salaries for Data Analyst roles
+
+SELECT
+  T.*,
+  ROUND(AVG(T.salary_year_avg) OVER (PARTITION BY T.company_name), 2) AS avg_company_salary
+FROM top_paying_jobs T
+ORDER BY avg_company_salary DESC, T.salary_year_avg DESC;
+```
+
+![Top-Paying Jobs](https://raw.githubusercontent.com/your-username/SQL_Project_Job_Analysis/main/images/image.png)
+
+---
+
+### **4️⃣ What skills are required for the top-paying Data Analyst jobs?**
+
+✅ **Most common skills listed in top-paying job postings**:
+
+- **BigQuery**
+- **Python**
+- **Tableau**
+- **SQL**
+- **Azure & AWS (Cloud Services)**
+
+🔹 _Insight:_ **SQL and Python** are essential for high-paying roles, while **cloud computing (AWS, Azure) and data visualization (Tableau, Power BI)** are also valuable.
+
+---
+
+### **5️⃣ Which skills are most in-demand for Data Analysts?**
+
+✅ **Most frequently mentioned skills across all job postings**:
+
+- **SQL**
+- **Python**
+- **Tableau**
+- **Power BI**
+- **Excel**
+
+🔹 _Insight:_ **SQL remains the #1 most in-demand skill**, followed by **Python and data visualization tools** like Tableau & Power BI.
+
+---
+
+## 🎯 **Key Takeaways**
+
+📌 **Tech Hubs Pay More**: Cities like **Vancouver, Richmond, and Waterloo** have the highest salaries.
+📌 **Remote Work is Competitive**: Remote roles offer **comparable pay** to on-site jobs.
+📌 **Specialization Matters**: Jobs in **finance, cloud computing, and risk analysis** offer higher salaries.
+📌 **SQL is King**: Every high-paying role **requires SQL**, often paired with **Python** and **data visualization tools**.
+
+---
+
+## 🚀 **Next Steps**
+
+- **Expand to More Job Roles**: Include **Data Scientists & Data Engineers** in future queries.
+- **Explore Remote Trends**: Analyze the **growth of remote work for Data Analysts**.
