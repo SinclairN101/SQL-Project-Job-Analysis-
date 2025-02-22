@@ -148,7 +148,3 @@ ORDER BY avg_company_salary DESC, T.salary_year_avg DESC;
 
 - **Expand to More Job Roles**: Include **Data Scientists & Data Engineers** in future queries.
 - **Explore Remote Trends**: Analyze the **growth of remote work for Data Analysts**.
-
-```
-
-```
