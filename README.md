@@ -46,13 +46,15 @@ To analyze job postings effectively, I used:
 - **Vancouver, BC**: $135,586
 - **Remote Jobs**: $134,902
 
+![Top-Paying Cities](images/Top_Paying_city.png)
+
 🔹 _Insight:_ Data Analyst salaries tend to be **higher in tech-focused cities** like Vancouver and Waterloo. Remote roles also offer competitive salaries.
 
 ---
 
 ### **2️⃣ What are the top 10 highest-paying Data Analyst jobs in Canada?**
 
-✅ **Top-paying job titles include**: -------->>>
+✅ **Top-paying job titles include**:
 
 - **Principal Data Analyst** – $160,000
 - **Data Architect** – $120,000
@@ -94,7 +96,6 @@ WITH top_paying_jobs AS (
   ORDER BY J.salary_year_avg DESC
   LIMIT 10
 )
--- Top companies with the highest average salaries for Data Analyst roles
 
 SELECT
   T.*,
@@ -118,20 +119,6 @@ ORDER BY avg_company_salary DESC, T.salary_year_avg DESC;
 - **Azure & AWS (Cloud Services)**
 
 🔹 _Insight:_ **SQL and Python** are essential for high-paying roles, while **cloud computing (AWS, Azure) and data visualization (Tableau, Power BI)** are also valuable.
-
----
-
-### **5️⃣ Which skills are most in-demand for Data Analysts?**
-
-✅ **Most frequently mentioned skills across all job postings**:
-
-- **SQL**
-- **Python**
-- **Tableau**
-- **Power BI**
-- **Excel**
-
-🔹 _Insight:_ **SQL remains the #1 most in-demand skill**, followed by **Python and data visualization tools** like Tableau & Power BI.
 
 ---
 
