@@ -29,4 +29,3 @@ SELECT
     ROUND(AVG(T.salary_year_avg) OVER (PARTITION BY T.company_name), 2) AS avg_company_salary
 FROM top_paying_jobs T
 ORDER BY avg_company_salary DESC, T.salary_year_avg DESC;
-
