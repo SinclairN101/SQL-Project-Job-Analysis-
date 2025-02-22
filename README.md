@@ -46,6 +46,23 @@ To analyze job postings effectively, I used:
 - **Vancouver, BC**: $135,586
 - **Remote Jobs**: $134,902
 
+```sql
+SELECT
+    CASE
+        WHEN job_location ILIKE 'Anywhere%' OR job_location ILIKE 'Canada' THEN 'Remote'
+        ELSE job_location
+    END AS location,
+    ROUND(AVG(salary_year_avg), 2) AS avg_salary
+FROM job_postings_fact
+WHERE
+    job_country = 'Canada'
+    AND salary_year_avg IS NOT NULL
+GROUP BY location
+HAVING COUNT(*) > 2
+ORDER BY avg_salary DESC
+LIMIT 10;
+```
+
 ![Top-Paying Cities](images/Top_Paying_city.png)
 
 🔹 _Insight:_ Data Analyst salaries tend to be **higher in tech-focused cities** like Vancouver and Waterloo. Remote roles also offer competitive salaries.
