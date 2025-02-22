@@ -63,7 +63,7 @@ ORDER BY avg_salary DESC
 LIMIT 10;
 ```
 
-![Top-Paying Cities](<Images/top paying canadian city.png>)
+![Top-Paying Cities](<images/top paying canadian city.png>)
 
 🔹 _Insight:_ Data Analyst salaries tend to be **higher in tech-focused cities** like Vancouver and Waterloo. Remote roles also offer competitive salaries.
 
@@ -121,9 +121,7 @@ FROM top_paying_jobs T
 ORDER BY avg_company_salary DESC, T.salary_year_avg DESC;
 ```
 
-![Top-Paying Jobs](Images/top_paying_jobs.png)
-
----
+![Top-Paying Jobs](images/top_paying_jobs.png)
 
 ### **4️⃣ What skills are required for the top-paying Data Analyst jobs?**
 
