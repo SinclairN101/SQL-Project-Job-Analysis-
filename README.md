@@ -103,7 +103,7 @@ FROM top_paying_jobs T
 ORDER BY avg_company_salary DESC, T.salary_year_avg DESC;
 ```
 
-![Top-Paying Jobs](https://raw.githubusercontent.com/your-username/SQL_Project_Job_Analysis/main/images/image.png)
+![Top-Paying Jobs](https://raw.githubusercontent.com/SinclairN101/SQL-Project-Job-Analysis/main/images/image.png)
 
 ---
 
